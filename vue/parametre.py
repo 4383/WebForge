@@ -11,12 +11,14 @@ CopyRight Hervé Beraud
 """
 import gettext
 from constante import *
+# Importer la version 2
 try:
     from Tkinter import Frame
     from Tkinter import Button
     from Tkinter import Listbox
     from Tkinter import Entry
     from Tkinter import Label
+# Gérer l'erreur en important la version 3
 except ImportError:
     from tkinter import Frame
     from tkinter import Button
@@ -52,8 +54,8 @@ class  Parametre():
         self.label_valeur.pack()
         self.valeur = Entry(self.frame_saisie)
         self.valeur.pack(fill='both')
-        self.bt = Button(self.frame_saisie, text=_('Ajouter'))
-        self.bt.pack(side='top')
+        self.btn_ajouter = Button(self.frame_saisie, text=_('Ajouter'))
+        self.btn_ajouter.pack(side='top')
         # Les éléments directement contenu dans la frame principale
         self.listparam = Listbox(self.frame, width=40)
         self.listparam.grid_configure(row=2, rowspan=3, column=0, columnspan=2)

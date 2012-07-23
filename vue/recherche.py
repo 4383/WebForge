@@ -21,5 +21,4 @@ class Recherche():
         self.txt_recherche = Entry(self.frame_top, width=90)
         self.txt_recherche.pack(expand='yes', side='left')
         self.btn_go = Button(self.frame_top, text="GO")
-        #self.btn_go.bind('<Button-1>', self.afficher)
         self.btn_go.pack(side='right')

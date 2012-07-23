@@ -8,6 +8,7 @@ import modele
 from vue import fenetre
 from vue import recherche
 from vue import parametre
+from controleur import parametre as CtrlParametre
 
 class Controleur:
     """
@@ -21,3 +22,4 @@ class Controleur:
         self.fenetre = fenetre.Fenetre(fenetreRacine)
         self.recherche = recherche.Recherche(fenetreRacine)
         self.parametre = parametre.Parametre(fenetreRacine)
+        self.ctrlparametre = CtrlParametre.Parametre(self.parametre)
