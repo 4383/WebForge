@@ -36,13 +36,27 @@ class  Parametre():
 
     def __init__(self, fenetre):
         """
-        Comments
+        Initialiser la classe
+        fenetre = fenetre parente ou seront collé les éléments
         """
         # La frame principale
         self.frame = Frame(fenetre, borderwidth=3, relief='raised', width=40)
-        self.frame.pack( fill='both', side='left', pady=10)
+        self.frame.pack(fill='both', side='left', pady=10)
         self.titre = Label(self.frame, text=_('Paramêtres'), font=(20))
         self.titre.pack()
+        self.creer_zone_de_saisie()
+        # Les éléments directement contenu dans la frame principale
+        self.frame_list = Frame(self.frame, width=40)
+        self.frame_list.pack(side='bottom', fill='both', expand='yes')
+        self.listparam_nom = Listbox(self.frame_list, width=20)
+        self.listparam_nom.pack(expand='yes', fill='both', side='left')
+        self.listparam_valeur = Listbox(self.frame_list, width=20)
+        self.listparam_valeur.pack(expand='yes', fill='both', side='right')
+
+    def creer_zone_de_saisie(self):
+        """
+        Générer la zone de saisie des parametres
+        """
         # Créer la zone de saisie
         self.frame_saisie = Frame(self.frame, relief='groove', width=35, borderwidth=1)
         self.frame_saisie.pack(pady=10, padx=10, fill='both', side='top')
@@ -56,10 +70,6 @@ class  Parametre():
         self.valeur.pack(fill='both')
         self.btn_ajouter = Button(self.frame_saisie, text=_('Ajouter'))
         self.btn_ajouter.pack(side='top')
-        # Les éléments directement contenu dans la frame principale
-        self.listparam = Listbox(self.frame, width=40)
-        self.listparam.grid_configure(row=2, rowspan=3, column=0, columnspan=2)
-        self.listparam.pack(side='bottom', expand='yes', fill='both')
 
 if __name__ == '__main__':
     from tkinter import Tk

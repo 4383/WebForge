@@ -5,10 +5,9 @@ Système de bascule entre fichiers host
 """
 
 import tkinter
-from controleur import principal
-import observateur
+from page import principal
 
 if __name__ == "__main__":
     fenetrePrincipal = tkinter.Tk()
-    controleur = principal.Controleur(fenetrePrincipal)
+    page = principal.Principal(fenetrePrincipal)
     fenetrePrincipal.mainloop()

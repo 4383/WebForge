@@ -8,7 +8,7 @@ Date 23/07/2012
 Version 1.0
 CopyRight Hervé Beraud
 """
-from constante import *
+from constante import GT_
 try:
     import tkMessageBox as messagebox
 except ImportError:
@@ -44,13 +44,17 @@ class Parametre:
             self.message(GT_('La valeur du paramêtre est obligatoire'))
             return
         # Insérer le nom et la valeur dans la liste
-        self.vue.listparam.insert(
-            self.vue.listparam.size(),
+        self.vue.listparam_nom.insert(
+            self.vue.listparam_nom.size(),
             nom
         )
-        self.formulaireSaisie(event)
+        self.vue.listparam_valeur.insert(
+            self.vue.listparam_valeur.size(),
+            nom
+        )
+        self.effecerformulaireSaisie(event)
 
-    def formulaireSaisie(self, event):
+    def effecerformulaireSaisie(self, event):
         """
         Effacer les données affichées dans le formulaire de
         saisie des données
