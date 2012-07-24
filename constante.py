@@ -8,10 +8,15 @@ Date 20/07/2012
 Version 1.0
 CopyRight Hervé Beraud
 """
+import gettext
 import os
 
 APP_NAME = 'WebForge'
 APP_PATH_TRAD = '%s/lg' % os.getcwd()
+
+gettext.bindtextdomain(APP_NAME, APP_PATH_TRAD)
+gettext.textdomain(APP_NAME)
+GT_ = gettext.gettext
 
 if __name__ == '__main__':
   print(APP_NAME)

@@ -8,16 +8,11 @@ Date 23/07/2012
 Version 1.0
 CopyRight Hervé Beraud
 """
-import gettext
 from constante import *
 try:
-    from Tkinter import messagebox
+    import tkMessageBox as messagebox
 except ImportError:
     from tkinter import messagebox
-
-gettext.bindtextdomain(APP_NAME, APP_PATH_TRAD)
-gettext.textdomain(APP_NAME)
-_ = gettext.gettext
 
 class Parametre:
     """
@@ -27,7 +22,8 @@ class Parametre:
 
     def __init__(self, vue):
         """
-        Comments
+        Constructeur du controleur de la vue "parametre"
+        A à sa charge la gestion des événements sur la vue "vue.parametre"
         """
         self.vue = vue
         self.vue.btn_ajouter.bind('<Button-1>', self.ajouterListe)
@@ -39,11 +35,15 @@ class Parametre:
         """
         nom = self.vue.nom.get()
         param = self.vue.valeur.get()
+        # Vérifier si le nom du paramêtre est saisie
         if not nom:
-            self.message(_('Le nom du paramêtre est obligatoire'))
+            self.message(GT_('Le nom du paramêtre est obligatoire'))
             return
+        # Vérifier si la valeur du paramêtre est saisie
         if not param:
-            self.message(_())
+            self.message(GT_('La valeur du paramêtre est obligatoire'))
+            return
+        # Insérer le nom et la valeur dans la liste
         self.vue.listparam.insert(
             self.vue.listparam.size(),
             nom
@@ -56,14 +56,15 @@ class Parametre:
         saisie des données
         """
         self.vue.nom.delete(0, 'end')
-        self.vue.valeur.delete(0)
+        self.vue.valeur.delete(0, 'end')
 
     def message(self, message):
         """
         Afficher une boite de dialogue
+        avec un message personnalisé
         """
         messagebox.showinfo(
-            _('Paramêtres'),
+            GT_('Paramêtres'),
             message
         )
 
