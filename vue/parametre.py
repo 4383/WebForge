@@ -11,6 +11,7 @@ CopyRight Hervé Beraud
 """
 import gettext
 from constante import *
+from component.tkListboxMulticolumn import TkListboxMulticolumn
 # Importer la version 2
 try:
     from Tkinter import Frame
@@ -45,13 +46,7 @@ class  Parametre():
         self.titre = Label(self.frame, text=_('Paramêtres'), font=(20))
         self.titre.pack()
         self.creer_zone_de_saisie()
-        # Les éléments directement contenu dans la frame principale
-        self.frame_list = Frame(self.frame, width=40)
-        self.frame_list.pack(side='bottom', fill='both', expand='yes')
-        self.listparam_nom = Listbox(self.frame_list, width=20)
-        self.listparam_nom.pack(expand='yes', fill='both', side='left')
-        self.listparam_valeur = Listbox(self.frame_list, width=20)
-        self.listparam_valeur.pack(expand='yes', fill='both', side='right')
+        self.creer_liste()
 
     def creer_zone_de_saisie(self):
         """
@@ -70,6 +65,13 @@ class  Parametre():
         self.valeur.pack(fill='both')
         self.btn_ajouter = Button(self.frame_saisie, text=_('Ajouter'))
         self.btn_ajouter.pack(side='top')
+
+    def creer_liste(self):
+        """
+        Creer les elements affichant la liste de parametres
+        """
+        self.lsparam = TkListboxMulticolumn(self.frame, ((GT_('Nom'), 20),(GT_('Valeur'), 20)))
+        self.lsparam.pack(expand='yes')
 
 if __name__ == '__main__':
     from tkinter import Tk
