@@ -52,9 +52,9 @@ class Parametre:
             self.vue.listparam_valeur.size(),
             nom
         )
-        self.effecerformulaireSaisie(event)
+        self.effacerformulaireSaisie(event)
 
-    def effecerformulaireSaisie(self, event):
+    def effacerformulaireSaisie(self, event):
         """
         Effacer les données affichées dans le formulaire de
         saisie des données
