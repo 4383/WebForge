@@ -4,8 +4,11 @@
 Système de bascule entre fichiers host
 """
 
-import tkinter
 from page import principal
+try:
+    import Tkinter as tkinter
+except ImportError:
+    import tkinter
 
 if __name__ == "__main__":
     fenetrePrincipal = tkinter.Tk()
