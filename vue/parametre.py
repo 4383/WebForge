@@ -10,7 +10,7 @@ Version 1.0
 CopyRight Hervé Beraud
 """
 import gettext
-from constante import *
+from constante import GT_
 from component.tkListboxMulticolumn import TkListboxMulticolumn
 # Importer la version 2
 try:
@@ -27,10 +27,6 @@ except ImportError:
     from tkinter import Entry
     from tkinter import Label
 
-gettext.bindtextdomain(APP_NAME, APP_PATH_TRAD)
-gettext.textdomain(APP_NAME)
-_ = gettext.gettext
-
 class  Parametre():
     """
     """
@@ -41,9 +37,9 @@ class  Parametre():
         fenetre = fenetre parente ou seront collé les éléments
         """
         # La frame principale
-        self.frame = Frame(fenetre, borderwidth=3, relief='raised', width=40)
-        self.frame.pack(fill='both', side='left', pady=10)
-        self.titre = Label(self.frame, text=_('Paramêtres'), font=(20))
+        self.frame = Frame(fenetre, borderwidth=1, relief='groove', width=40)
+        self.frame.pack(fill='both', side='left', pady=0)
+        self.titre = Label(self.frame, text=GT_('Paramêtres'), font=(20))
         self.titre.pack()
         self.creer_zone_de_saisie()
         self.creer_liste()
@@ -59,11 +55,11 @@ class  Parametre():
         self.label_nom.pack()
         self.nom = Entry(self.frame_saisie)
         self.nom.pack(fill='both')
-        self.label_valeur = Label(self.frame_saisie, text=_('Valeur'))
+        self.label_valeur = Label(self.frame_saisie, text=GT_('Valeur'))
         self.label_valeur.pack()
         self.valeur = Entry(self.frame_saisie)
         self.valeur.pack(fill='both')
-        self.btn_ajouter = Button(self.frame_saisie, text=_('Ajouter'))
+        self.btn_ajouter = Button(self.frame_saisie, text=GT_('Ajouter'))
         self.btn_ajouter.pack(side='top')
 
     def creer_liste(self):
