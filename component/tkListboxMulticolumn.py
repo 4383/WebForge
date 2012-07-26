@@ -17,28 +17,28 @@ except ImportError:
     from tkinter import Label
     from tkinter import Listbox
 
-class  TkListboxMulticolumn():
+class  TkListboxMulticolumn(Frame):
     """
-    Class  TkListboxMulticolumn
-
+    TkListboxMulticolumn component which can display multi-sortable listbox
     """
 
-    def __init__(self, root, columns):
+    def __init__(self, master=None, columns=(), cnf={}, **kw):
         """
-        Constructeur de la classe TkListboxMulticolumn
-        root = La fenetre parente
-        columns = Les colonnes à générer
+        Construct a listbox widget with one or many column and label field for header
+
+        Valid resource names: background, bd, bg, borderwidth, class, colormap,
+        fg, font, foreground, height, highlightbackground,
         """
+        Frame.__init__(self, master)
         if not columns:
-           raise Exception('No data imported')
+           raise Exception('No columns required')
 
-        # Construire le conteneur qui contiendra tout nos élements
-        self.Conteneur = Frame(root)
         # Construire le contenur de label
-        self.libelle = Frame(self.Conteneur)
+        self.libelle = Frame(self)
+        #self.libelle = Frame(self.Conteneur)
         self.libelle.pack(side='top')
         # Construire le conteneur de listbox
-        self.listboxs = Frame(self.Conteneur)
+        self.listboxs = Frame(self)
         self.listboxs.pack(side='bottom', expand='yes', fill='both')
         self.columns = []
 
@@ -46,17 +46,13 @@ class  TkListboxMulticolumn():
         for texte, dimension in columns:
             Label(
                 self.libelle,
+                kw,
                 text=texte,
-                borderwidth=1,
-                relief='raised',
                 width=dimension
-            ).pack(side='left')
+            ).pack(side='left', expand='yes')
             listbox = Listbox(self.listboxs, width=dimension)
             listbox.pack(expand='yes', fill='both', side='left')
             self.columns.append(listbox)
-
-    def pack(self, side='top', expand='no', fill='both'):
-        self.Conteneur.pack(side=side, expand=expand, fill=fill)
 
 if __name__ == '__main__':
     try:
@@ -64,6 +60,11 @@ if __name__ == '__main__':
     except ImportError:
         from tkinter import Tk
     fenetre = Tk()
-    test =  TkListboxMulticolumn(fenetre, (('test', 40), ('test2', 20), ('test3', 30)))
-    #test =  TkListboxMulticolumn(fenetre, "")
+    test =  TkListboxMulticolumn(fenetre, (
+        ('Number', 10),
+        ('Name', 40),
+        ('Firstname', 40),
+        ('City', 50)
+    ))
+    test.pack(side='top', expand='yes', fill='both')
     fenetre.mainloop()
