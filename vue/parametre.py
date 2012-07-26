@@ -66,8 +66,8 @@ class  Parametre():
         """
         Creer les elements affichant la liste de parametres
         """
-        self.lsparam = TkListboxMulticolumn(self.frame, ((GT_('Nom'), 20),(GT_('Valeur'), 20)))
-        self.lsparam.pack(expand='yes')
+        self.lsparam = TkListboxMulticolumn(self.frame, ((GT_('Nom'), 20),(GT_('Valeur'), 20)), relief='groove')
+        self.lsparam.pack(expand='yes', fill='both')
 
 if __name__ == '__main__':
     from tkinter import Tk
