@@ -31,7 +31,7 @@ class  TkListboxMulticolumn(Frame):
         """
         Frame.__init__(self, master)
         if not columns:
-           raise Exception('No columns required')
+            raise Exception('No columns required')
 
         # Construire le contenur de label
         self.libelle = Frame(self)
@@ -50,9 +50,47 @@ class  TkListboxMulticolumn(Frame):
                 text=texte,
                 width=dimension
             ).pack(side='left', expand='yes')
-            listbox = Listbox(self.listboxs, width=dimension)
+            listbox = Listbox(self.listboxs, width=dimension, exportselection='false')
             listbox.pack(expand='yes', fill='both', side='left')
+            listbox.bind('<B1-Motion>', lambda e, s=self: s._select(e.y))
+            listbox.bind('<Button-1>', lambda e, s=self: s._select(e.y))
+            listbox.bind('<Leave>', lambda e: 'break')
             self.columns.append(listbox)
+
+    def _select(self, y):
+        """
+        Configure the widget for call methods of
+        all listbox when one list receive event select
+        """
+        row = self.columns[0].nearest(y)
+        self.selection_clear(0, 'end')
+        self.selection_set(row)
+        return 'break'
+
+    def insert(self, index, *elements):
+        """
+        Override of Listbox.insert methods
+        index is the index to insert on
+        elements is a tuple a element to insert on
+        One tuple = one row
+        One tuple.column = one column
+        """
+        for el in elements:
+            i = 0
+            for column in self.columns:
+                column.insert(index, el[i])
+                i = i + 1
+
+    def selection_set(self, first, last=None):
+        """
+        Override
+        """
+        for column in self.columns:
+            column.selection_set(first, last)
+
+    def selection_clear(self, first, last=None):
+        for column in self.columns:
+            column.selection_clear(first, last)
 
 if __name__ == '__main__':
     try:
@@ -66,5 +104,6 @@ if __name__ == '__main__':
         ('Firstname', 40),
         ('City', 50)
     ))
+    test.insert('end', (1, 'BERAUD', 'Hervé', 'Martigues'))
     test.pack(side='top', expand='yes', fill='both')
     fenetre.mainloop()
