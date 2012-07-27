@@ -44,14 +44,7 @@ class Parametre:
             self.message(GT_('La valeur du paramêtre est obligatoire'))
             return
         # Insérer le nom et la valeur dans la liste
-        self.vue.listparam_nom.insert(
-            self.vue.listparam_nom.size(),
-            nom
-        )
-        self.vue.listparam_valeur.insert(
-            self.vue.listparam_valeur.size(),
-            nom
-        )
+        self.vue.lsparam.insert('end', (nom, param))
         self.effacerformulaireSaisie(event)
 
     def effacerformulaireSaisie(self, event):
