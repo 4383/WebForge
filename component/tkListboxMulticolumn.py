@@ -31,38 +31,43 @@ class  TkListboxMulticolumn(Frame):
         """
         Frame.__init__(self, master)
         if not columns:
-            raise Exception('No columns required')
+            raise Exception('2 or many Columns required (%s given)' % columns.__sizeof__())
 
-        # Construire le contenur de label
+        # Construct label containers
         self.libelle = Frame(self)
-        #self.libelle = Frame(self.Conteneur)
         self.libelle.pack(side='top')
-        # Construire le conteneur de listbox
+        # Construct Listbox containers
         self.listboxs = Frame(self)
         self.listboxs.pack(side='bottom', expand='yes', fill='both')
         self.columns = []
 
-        # Contruire dynamiquement les différents labels et lists
+        # Contruct all columns (listbox) with title (label)
         for texte, dimension in columns:
+            # Create title
             Label(
                 self.libelle,
                 kw,
                 text=texte,
                 width=dimension
             ).pack(side='left', expand='yes')
+            # Create columns
             listbox = Listbox(self.listboxs, width=dimension, exportselection='false')
             listbox.pack(expand='yes', fill='both', side='left')
+            # Bind all event for override
             listbox.bind('<B1-Motion>', lambda e, s=self: s._select(e.y))
             listbox.bind('<Button-1>', lambda e, s=self: s._select(e.y))
             listbox.bind('<Leave>', lambda e: 'break')
+            # Add listbox to list
             self.columns.append(listbox)
 
-    def _select(self, y):
+    def _select(self, ordinate):
         """
         Configure the widget for call methods of
         all listbox when one list receive event select
+        take ordinate position of mouse and convert this
+        in position in listbox for get items
         """
-        row = self.columns[0].nearest(y)
+        row = self.columns[0].nearest(ordinate)
         self.selection_clear(0, 'end')
         self.selection_set(row)
         return 'break'
@@ -83,14 +88,25 @@ class  TkListboxMulticolumn(Frame):
 
     def selection_set(self, first, last=None):
         """
-        Override
+        Override Listbox method selection_set
+        to make same select in many independant Listbox
         """
         for column in self.columns:
             column.selection_set(first, last)
 
     def selection_clear(self, first, last=None):
+        """
+        Override
+        """
         for column in self.columns:
             column.selection_clear(first, last)
+
+    def size(self):
+        """
+        Override Listbox method size.
+        Return first column size
+        """
+        return self.columns[0].size()
 
 if __name__ == '__main__':
     try:
@@ -104,6 +120,7 @@ if __name__ == '__main__':
         ('Firstname', 40),
         ('City', 50)
     ))
+    test.insert('end', (1, 'BERAUD', 'Hervé', 'Martigues'))
     test.insert('end', (1, 'BERAUD', 'Hervé', 'Martigues'))
     test.pack(side='top', expand='yes', fill='both')
     fenetre.mainloop()
