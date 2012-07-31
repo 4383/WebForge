@@ -22,7 +22,7 @@ class  TkListboxMulticolumn(Frame):
     TkListboxMulticolumn component which can display multi-sortable listbox
     """
 
-    def __init__(self, master=None, columns=(), cnf={}, **kw):
+    def __init__(self, master, columns, cnf={}, **kw):
         """
         Construct a listbox widget with one or many column and label field for header
 
@@ -31,7 +31,7 @@ class  TkListboxMulticolumn(Frame):
         """
         Frame.__init__(self, master)
         if not columns:
-            raise Exception('2 or many Columns required (%s given)' % columns.__sizeof__())
+            raise Exception('2 or many Columns required')
 
         # Construct label containers
         self.libelle = Frame(self)
