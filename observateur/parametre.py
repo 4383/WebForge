@@ -40,8 +40,8 @@ class Parametre:
         for func in self.callback:
             func(self.data)
 
-    def set(self, data):
-        for key, value in data:
+    def set(self, donnees):
+        for key, value in donnees.items():
             self.data[key] = value
 
     def get(self):
@@ -55,7 +55,8 @@ if __name__ == '__main__':
     print("Dict = %s" % test.get())
     test.set({"test" : "1"})
     print("Dict = %s" % test.get())
-    test.set({"test" : "2"})
+    test.set({"test2" : "2"})
+    print("Dict = %s" % test.get())
 
 
 

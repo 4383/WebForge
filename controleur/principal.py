@@ -1,25 +1,32 @@
 #!/usr/bin/python3
 #-*- coding: utf-8 -*-
-"""
-Système de bascule entre fichiers host
-"""
-
+'''
+File: principal.py
+Author: Hervé Beraud
+Description: Primary controler
+'''
 import modele
-from vue import fenetre
-from vue import recherche
-from vue import parametre
-from controleur import parametre as CtrlParametre
+from vue.fenetre import Fenetre as V_Fenetre
+from vue.recherche import Recherche as V_Recherche
+from vue.parametre import Parametre as V_Parametre
+from modele.parametre import Parametre as M_Parametre
+from controleur.parametre import Parametre as C_Parametre
 
-class Controleur:
+class Principal:
     """
-    Class Controleur
+    Class Principal
+    Bind all view and controlers
     """
-    def __init__(self, fenetreRacine):
+    def __init__(self, root):
         """
-        Contructeur de la classe Controleur
-        Prend en parametre la fenetre parente
+        Construct of primary controler
+        root = parent window tkinter
         """
-        self.fenetre = fenetre.Fenetre(fenetreRacine)
-        self.recherche = recherche.Recherche(fenetreRacine)
-        self.parametre = parametre.Parametre(fenetreRacine)
-        self.ctrlparametre = CtrlParametre.Parametre(self.parametre)
+        # Instanciate all transverse modele
+        self.m_parametre = M_Parametre()
+        # Instanciate all view
+        self.v_fenetre = V_Fenetre(root)
+        self.v_recherche = V_Recherche(root)
+        self.v_parametre = V_Parametre(root)
+        # Instanciate all controlers
+        self.c_parametre = C_Parametre(self.v_parametre)

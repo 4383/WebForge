@@ -4,7 +4,7 @@
 Système de bascule entre fichiers host
 """
 
-from page import principal
+from controleur import principal
 try:
     import Tkinter as tkinter
 except ImportError:
