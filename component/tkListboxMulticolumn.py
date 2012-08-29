@@ -86,6 +86,10 @@ class  TkListboxMulticolumn(Frame):
                 column.insert(index, el[i])
                 i = i + 1
 
+    def delete(self, first, last=None):
+        for column in self.columns:
+            column.delete(first, last)
+
     def selection_set(self, first, last=None):
         """
         Override Listbox method selection_set
@@ -100,6 +104,14 @@ class  TkListboxMulticolumn(Frame):
         """
         for column in self.columns:
             column.selection_clear(first, last)
+
+    def curselection(self):
+        return self.columns[0].curselection()
+
+    def get(self, first, last=None):
+        """
+        """
+        return self.columns[0].get(first, last)
 
     def size(self):
         """
