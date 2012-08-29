@@ -20,13 +20,16 @@ class Parametre:
     Classe de controle de la vue "parametre"
     """
 
-    def __init__(self, vue):
+    def __init__(self, vue, model):
         """
         Constructeur du controleur de la vue "parametre"
         A à sa charge la gestion des événements sur la vue "vue.parametre"
         """
         self.vue = vue
+        self.model = model
+        self.model.myParam.add_callback(self.param_change)
         self.vue.btn_ajouter.bind('<Button-1>', self.ajouterListe)
+        self.vue.btn_delete.bind('<Button-1>', self.retirerListe)
 
     def ajouterListe(self, event):
         """
@@ -44,8 +47,21 @@ class Parametre:
             self.message(GT_('La valeur du paramêtre est obligatoire'))
             return
         # Insérer le nom et la valeur dans la liste
-        self.vue.lsparam.insert('end', (nom, param))
+        self.model.addParam(nom, param)
         self.effacerformulaireSaisie(event)
+
+    def retirerListe(self, event):
+        """
+        Delete select row from listbox
+        """
+        item = self.vue.lsparam.get(self.vue.lsparam.curselection()[0])
+        self.model.delParam(item)
+
+    def param_change(self, liste):
+        """
+        Check parameters list change
+        """
+        self.vue.set_liste(liste)
 
     def effacerformulaireSaisie(self, event):
         """

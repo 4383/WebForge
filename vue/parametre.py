@@ -68,6 +68,16 @@ class  Parametre():
         """
         self.lsparam = TkListboxMulticolumn(self.frame, ((GT_('Nom'), 20),(GT_('Valeur'), 20)), relief='groove')
         self.lsparam.pack(expand='yes', fill='both')
+        self.btn_delete = Button(self.frame, text=GT_('Supprimer'))
+        self.btn_delete.pack(side='bottom')
+
+    def set_liste(self, liste):
+        """
+        Update parameters list
+        """
+        self.lsparam.delete(0, 'end')
+        for key, value in  liste.items():
+            self.lsparam.insert('end', (key, value))
 
 if __name__ == '__main__':
     from tkinter import Tk
