@@ -12,12 +12,15 @@ import gettext
 import os
 
 APP_NAME = 'WebForge'
-APP_PATH_TRAD = '%s/lg' % os.getcwd()
+APP_PATH_TRAD = '%s%slg' % (os.getcwd(), os.sep)
+RESSOURCES_PATH = '%s%sressources%s' % (os.getcwd(), os.sep, os.sep)
+VERSION = 0.1
 
 gettext.bindtextdomain(APP_NAME, APP_PATH_TRAD)
 gettext.textdomain(APP_NAME)
 GT_ = gettext.gettext
 
 if __name__ == '__main__':
-  print(APP_NAME)
-  print(APP_PATH_TRAD)
+    print(APP_NAME)
+    print(APP_PATH_TRAD)
+    print(RESSOURCES_PATH)
