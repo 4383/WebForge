@@ -16,24 +16,23 @@ class Parametre:
     Modele representation of HTTP REQUEST PARAMETERS
     """
 
-    def __init__(self):
+    def __init__(self, data={}):
         """
         Comments
         """
-        self.myParam = O_Parametre()
+        self.myParam = O_Parametre(data)
 
-    def addParam(self, name, value):
+    def add_param(self, name, value):
         """
         Comments
         """
         self.myParam.set(name, value)
 
-    def delParam(self, index):
+    def del_param(self, index):
         """
         docstring for delParam
         """
         self.myParam.delete(index)
 
 if __name__ == '__main__':
-  test = Parametre()
-
+    TEST = Parametre()

@@ -47,7 +47,7 @@ class Parametre:
             self.message(GT_('La valeur du paramêtre est obligatoire'))
             return
         # Insérer le nom et la valeur dans la liste
-        self.model.addParam(nom, param)
+        self.model.add_param(nom, param)
         self.effacerformulaireSaisie(event)
 
     def retirerListe(self, event):
@@ -55,7 +55,7 @@ class Parametre:
         Delete select row from listbox
         """
         item = self.vue.lsparam.get(self.vue.lsparam.curselection()[0])
-        self.model.delParam(item)
+        self.model.del_param(item)
 
     def param_change(self, liste):
         """
