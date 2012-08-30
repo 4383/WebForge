@@ -3,40 +3,30 @@
 """
 File: observable.py
 Author: Hervé Beraud
-Description: Classe observatrice de model
+Description: Classe observatrice du model de données des url
 Date 02/08/2012
 Version 1.0
 CopyRight Hervé Beraud
 """
 from observateur.observateur import Observateur
 
-class Parametre(Observateur):
+class Recherche(Observateur):
     """
     Class Observable
     Observer le comportement de models de données
     """
 
-    def set(self, name, value):
+    def set(self, url):
         """
-        Set a new value into dict
+        Set a new url value
         """
-        self.data[name] = value
-        self._do_callbacks()
-
-    def delete(self, index):
-        """
-        Delete the item at the position defined by index
-        """
-        self.data.pop(index)
+        self.data = url
         self._do_callbacks()
 
 if __name__ == '__main__':
-    test = Parametre()
+    test = Recherche()
     print("Dict = %s" % test.get())
-    test.set("test", "1")
+    test.set("http://google.fr")
     print("Dict = %s" % test.get())
-    test.set("test2", "2")
+    test.set("http://free.fr")
     print("Dict = %s" % test.get())
-
-
-
