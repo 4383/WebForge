@@ -8,7 +8,6 @@ Date 02/08/2012
 Version 1.0
 CopyRight Hervé Beraud
 """
-import os
 
 class Observateur:
     """

@@ -12,8 +12,8 @@ from observateur.observateur import Observateur
 
 class Parametre(Observateur):
     """
-    Class Observable
-    Observer le comportement de models de données
+    Class Parametre
+    Parameters observator object
     """
 
     def set(self, name, value):
