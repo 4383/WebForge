@@ -16,6 +16,9 @@ class Recherche(Observateur):
     Observer le comportement de models de données
     """
 
+    def __init__(self, data=""):
+        super(Recherche, self).__init__(data)
+
     def set(self, url):
         """
         Set a new url value

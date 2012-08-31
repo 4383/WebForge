@@ -10,6 +10,10 @@ CopyRight Hervé Beraud
 """
 from constante import GT_
 try:
+    from urlparse import urlparse
+except ImportError:
+    from urllib.parse import urlparse
+try:
     import tkMessageBox as messagebox
 except ImportError:
     from tkinter import messagebox
@@ -29,6 +33,7 @@ class Recherche:
         self.model = model
         self.model.my_recherche.add_callback(self.param_change)
         self.vue.btn_erase.bind('<Button-1>', self.effacerformulaireSaisie)
+        self.vue.btn_go.bind('<Button-1>', self.lancerRecherche)
 
     def param_change(self, url):
         """
@@ -40,6 +45,11 @@ class Recherche:
         """
         Launch url, and run request
         """
+        url = self.vue.txt_recherche.get()
+        if not url:
+            self.message(GT_('Vous devez saisir obligatoirement une url'))
+        url = urlparse(url)
+        self.model.add_param(url)
 
     def effacerformulaireSaisie(self, event):
         """
@@ -53,7 +63,7 @@ class Recherche:
         avec un message personnalisé
         """
         messagebox.showinfo(
-            GT_('Paramêtres'),
+            GT_('Recherche'),
             message
         )
 

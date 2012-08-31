@@ -8,7 +8,7 @@ Date 29/08/2012
 Version 1.0
 CopyRight Hervé Beraud
 """
-from observateur.parametre import Parametre as O_Parametre
+from observateur.recherche import Recherche as O_Recherche
 
 class Recherche:
     """
@@ -20,7 +20,7 @@ class Recherche:
         """
         Comments
         """
-        self.my_recherche = O_Parametre(data)
+        self.my_recherche = O_Recherche(data)
 
     def add_param(self, url):
         """

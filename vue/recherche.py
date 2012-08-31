@@ -37,7 +37,7 @@ class Recherche():
         self.logo.pack(pady=(0, 20), side="left")
         self.brand = Label(self.frame_top, text=GT_('WebForge %s' % VERSION), font=(20))
         self.brand.pack(pady=(10, 20), padx=(0, 20), side="left")
-        self.txt_recherche = Entry(self.frame_top)
+        self.txt_recherche = Entry(self.frame_top, font=(22))
         self.txt_recherche.pack(pady=(0, 20), expand='yes', fill='both', side='left')
         self.btn_go = Button(self.frame_top, text="GO")
         self.btn_go.pack(pady=(0, 20), side='right')
@@ -48,5 +48,4 @@ class Recherche():
         """
         Set a new url value to the field
         """
-        print("ok")
         self.txt_recherche.insert(0, url)
