@@ -9,6 +9,7 @@ Version 1.0
 CopyRight Hervé Beraud
 """
 from constante import GT_
+from core.request import Action
 try:
     from urlparse import urlparse
 except ImportError:
@@ -39,6 +40,7 @@ class Recherche:
         """
         Check parameters list change
         """
+        self.effacerformulaireSaisie(None)
         self.vue.set_url(url)
 
     def lancerRecherche(self, event):
@@ -48,8 +50,16 @@ class Recherche:
         url = self.vue.txt_recherche.get()
         if not url:
             self.message(GT_('Vous devez saisir obligatoirement une url'))
-        url = urlparse(url)
+        urltest = urlparse(url)
+        if not urltest[0]:
+            self.message(GT_('''Format d'url non valide '''))
+            return
+        if "http" not in urltest[0]:
+            self.message(GT_('Protocole non pris en chage : %s' % urltest[0]))
+            return
         self.model.add_param(url)
+        action = Action()
+        action.search()
 
     def effacerformulaireSaisie(self, event):
         """
