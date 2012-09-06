@@ -11,6 +11,7 @@ class Fenetre():
         """
         Constructeur de la fenetre
         """
+        w, h = fenetre.winfo_screenwidth(), fenetre.winfo_screenwidth()
         self.fenetre = fenetre
         self.fenetre.title("WebForge")
-        self.fenetre.geometry("800x600+50+50")
+        self.fenetre.geometry("%dx%d+0+0" % (w, h))
