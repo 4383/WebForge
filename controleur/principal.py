@@ -5,9 +5,10 @@ File: principal.py
 Author: Hervé Beraud
 Description: Primary controler
 '''
-from modele.parametre import Parametre as M_Parametre
-from modele.recherche import Recherche as M_Recherche
+from model.parametre import Parametre as M_Parametre
+from model.recherche import Recherche as M_Recherche
 from vue.fenetre import Fenetre as V_Fenetre
+from vue.menubar import Menubar as V_Menubar
 from vue.recherche import Recherche as V_Recherche
 from vue.parametre import Parametre as V_Parametre
 from controleur.parametre import Parametre as C_Parametre
@@ -28,6 +29,7 @@ class Principal:
         self.m_recherche = M_Recherche()
         # Instanciate all view
         self.v_fenetre = V_Fenetre(root)
+        self.v_menubar = V_Menubar(root)
         self.v_recherche = V_Recherche(root)
         self.v_parametre = V_Parametre(root)
         # Instanciate all controlers
