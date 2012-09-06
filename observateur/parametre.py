@@ -37,6 +37,3 @@ if __name__ == '__main__':
     print("Dict = %s" % test.get())
     test.set("test2", "2")
     print("Dict = %s" % test.get())
-
-
-
