@@ -12,6 +12,7 @@ CopyRight Hervé Beraud
 import gettext
 from constante import GT_
 from component.tkListboxMulticolumn import TkListboxMulticolumn
+from vue.vue import Vue
 # Importer la version 2
 try:
     from Tkinter import Frame
@@ -27,7 +28,7 @@ except ImportError:
     from tkinter import Entry
     from tkinter import Label
 
-class  Parametre():
+class Parametre(Vue):
     """
     """
 
@@ -37,12 +38,18 @@ class  Parametre():
         fenetre = fenetre parente ou seront collé les éléments
         """
         # La frame principale
+        super(Parametre, self).__init__()
         self.frame = Frame(fenetre, borderwidth=1, relief='groove', width=40)
-        self.frame.pack(fill='both', side='left', pady=0)
         self.titre = Label(self.frame, text=GT_('Paramêtres'), font=(20))
         self.titre.pack()
         self.creer_zone_de_saisie()
         self.creer_liste()
+
+    def visible(self):
+        """
+        Override the parent method for config element visibility
+        """
+        super(Parametre, self).visible(fill='both', side='left', pady=0)
 
     def creer_zone_de_saisie(self):
         """
