@@ -3,7 +3,7 @@
 """
 File: request.py
 Author: Hervé Beraud
-Description: Controler la zone Recherche
+Description: Application core.
 Date 23/07/2012
 Version 1.0
 CopyRight Hervé Beraud
