@@ -11,6 +11,7 @@ from vue.fenetre import Fenetre as V_Fenetre
 from vue.menubar import Menubar as V_Menubar
 from vue.recherche import Recherche as V_Recherche
 from vue.parametre import Parametre as V_Parametre
+from controleur.menubar import Menubar as C_Menubar
 from controleur.parametre import Parametre as C_Parametre
 from controleur.recherche import Recherche as C_Recherche
 
@@ -32,6 +33,10 @@ class Principal:
         self.v_menubar = V_Menubar(root)
         self.v_recherche = V_Recherche(root)
         self.v_parametre = V_Parametre(root)
+        vues = {
+            'parametre' : self.v_parametre,
+        }
         # Instanciate all controlers
+        self.c_menubar = C_Menubar(self.v_menubar, vues)
         self.c_parametre = C_Parametre(self.v_parametre, self.m_parametre)
         self.c_recherche = C_Recherche(self.v_recherche, self.m_recherche)
