@@ -41,6 +41,8 @@ class Menubar:
         """
         self.vues['parametre'].visible()
         self.vue.affichage.entryconfig(0, command=self.vues['parametre'].visible)
+        self.vues['header'].visible()
+        self.vue.affichage.entryconfig(1, command=self.vues['header'].visible)
 
     def init_menu_aide(self, liste):
         """

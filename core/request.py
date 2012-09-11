@@ -11,6 +11,7 @@ CopyRight Hervé Beraud
 from constante import GT_
 from model.recherche import Recherche
 from model.parametre import Parametre
+from model.header import Header
 import urllib
 try:
     from urllib.parse import urlparse
@@ -36,16 +37,17 @@ class Action:
         """
         self.param = Parametre()
         self.recherche = Recherche()
+        self.header = Header()
 
     def search(self):
         """
         """
         self.param = urlencode(self.param.myParam.get())
         self.recherche = urlparse(self.recherche.my_recherche.get())
-
         connection = httplib.HTTPConnection(self.recherche[1])
-        connection.request("POST", "", self.param)
+        connection.request("POST", "", self.param, self.header.my_header.get())
         response = connection.getresponse()
+        connection.close()
         print(response.getheaders())
 
 if __name__ == '__main__':
