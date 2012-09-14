@@ -29,7 +29,8 @@ class Recherche(Vue):
         """
         Constructeur de la fenetre
         """
-        self.frame = Frame(fenetre, borderwidth=1, relief='groove', width=100)
+        self.parent = fenetre
+        self.frame = Frame(self.parent, borderwidth=1, relief='groove', width=100)
         self.frame.pack_configure(side='top', fill='both')
         self.frame.pack()
         self.titre = Label(self.frame, text=GT_('Url'), font=(20))

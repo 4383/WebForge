@@ -14,6 +14,8 @@ from vue.recherche import Recherche as V_Recherche
 from vue.parametre import Parametre as V_Parametre
 from vue.result import Result as V_Result
 from vue.header import Header as V_Header
+from vue.status import Status as V_Status
+from vue.onglet import Onglet as V_Onglet
 from controleur.menubar import Menubar as C_Menubar
 from controleur.parametre import Parametre as C_Parametre
 from controleur.recherche import Recherche as C_Recherche
@@ -36,16 +38,24 @@ class Principal:
         # Instanciate all view
         self.v_fenetre = V_Fenetre(root)
         self.v_menubar = V_Menubar(root)
-        self.v_recherche = V_Recherche(root)
-        self.v_parametre = V_Parametre(root)
-        self.v_result = V_Result(root)
-        self.v_header = V_Header(root)
-        vues = {
+        self.v_recherche = V_Recherche(self.v_fenetre.top)
+        self.v_parametre = V_Parametre(self.v_fenetre.left)
+        self.v_result = V_Result(self.v_fenetre.right)
+        self.v_header = V_Header(self.v_fenetre.right)
+        self.v_status = V_Status(self.v_result.frame)
+        self.v_onglet = V_Onglet(self.v_result.frame)
+        # Instanciate all controlers
+        self.c_menubar = C_Menubar(
+            self.v_menubar,
+            {
             'parametre' : self.v_parametre,
             'header' : self.v_header,
-        }
-        # Instanciate all controlers
-        self.c_menubar = C_Menubar(self.v_menubar, vues)
+            }
+        )
         self.c_parametre = C_Parametre(self.v_parametre, self.m_parametre)
-        self.c_recherche = C_Recherche(self.v_recherche, self.m_recherche)
+        self.c_recherche = C_Recherche(
+            self.v_recherche,
+            self.m_recherche,
+            self.v_status
+        )
         self.c_parametre = C_Header(self.v_header, self.m_header)

@@ -30,7 +30,7 @@ class Result(Vue):
         Constructeur de la fenetre
         """
         self.frame = Frame(fenetre, borderwidth=1, relief='groove')
-        self.frame.pack_configure(side='right', expand='yes', fill='both')
+        self.frame.pack_configure(side='left', expand='yes', fill='both')
         self.frame.pack()
         self.titre = Label(self.frame, text=GT_('Resultats'), font=(20))
         self.titre.pack()
