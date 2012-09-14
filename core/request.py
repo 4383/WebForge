@@ -13,6 +13,8 @@ from model.recherche import Recherche
 from model.parametre import Parametre
 from model.header import Header
 import urllib
+import threading
+import queue
 try:
     from urllib.parse import urlparse
     from urllib.parse import urlencode as urlencode
@@ -42,13 +44,18 @@ class Action:
     def search(self):
         """
         """
+        q = queue.Queue()
         self.param = urlencode(self.param.myParam.get())
         self.recherche = urlparse(self.recherche.my_recherche.get())
+        threading.Thread(target=self._requester, args=(q,)).start()
+        print(q.get())
+
+    def _requester(self, q):
         connection = httplib.HTTPConnection(self.recherche[1])
         connection.request("POST", "", self.param, self.header.my_header.get())
         response = connection.getresponse()
         connection.close()
-        print(response.getheaders())
+        q.put(response.getheaders())
 
 if __name__ == '__main__':
     test = Action()
