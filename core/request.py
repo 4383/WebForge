@@ -41,21 +41,19 @@ class Action:
         self.recherche = Recherche()
         self.header = Header()
 
-    def search(self):
+    def search(self, q):
         """
         """
-        q = queue.Queue()
         self.param = urlencode(self.param.myParam.get())
         self.recherche = urlparse(self.recherche.my_recherche.get())
-        threading.Thread(target=self._requester, args=(q,)).start()
-        print(q.get())
+        self._requester()
 
-    def _requester(self, q):
+    def _requester(self):
         connection = httplib.HTTPConnection(self.recherche[1])
         connection.request("POST", "", self.param, self.header.my_header.get())
         response = connection.getresponse()
         connection.close()
-        q.put(response.getheaders())
+        print(response.getheaders())
 
 if __name__ == '__main__':
     test = Action()

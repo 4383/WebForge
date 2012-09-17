@@ -11,6 +11,7 @@ CopyRight Hervé Beraud
 from constante import GT_
 from constante import RESSOURCES_PATH
 from core.request import Action
+import threading
 try:
     from urlparse import urlparse
 except ImportError:
@@ -49,13 +50,17 @@ class Recherche:
         """
         Launch url, and run request
         """
+        from queue import Queue
         self._busy()
+        q = Queue()
         url = self.vue.txt_recherche.get()
         if not self._is_valide(url):
             return False
         self.model.add_param(url)
         action = Action()
-        action.search()
+        request = threading.Thread(target=action.search, args=(q,))
+        request.start()
+        request.join()
         self._free()
 
     def _is_valide(self, url):
@@ -79,12 +84,14 @@ class Recherche:
     def _busy(self):
         """
         """
-        self.vue.txt_recherche.config(bg="gray")
+        self.vue.txt_recherche.config(state="disabled")
         self.vue.parent.config(cursor='watch')
+        print(1)
 
     def _free(self):
-        self.vue.txt_recherche.config(bg="white")
+        self.vue.txt_recherche.config(state="normal")
         self.vue.parent.config(cursor='arrow')
+        print(2)
 
     def effacerformulaireSaisie(self, event):
         """
