@@ -8,6 +8,7 @@ Description: Primary controler
 from model.parametre import Parametre as M_Parametre
 from model.recherche import Recherche as M_Recherche
 from model.header import Header as M_Header
+from model.result import Result as M_Result
 from vue.fenetre import Fenetre as V_Fenetre
 from vue.menubar import Menubar as V_Menubar
 from vue.recherche import Recherche as V_Recherche
@@ -20,6 +21,7 @@ from controleur.menubar import Menubar as C_Menubar
 from controleur.parametre import Parametre as C_Parametre
 from controleur.recherche import Recherche as C_Recherche
 from controleur.header import Header as C_Header
+from controleur.result import Result as C_Result
 
 class Principal:
     """
@@ -35,6 +37,7 @@ class Principal:
         self.m_parametre = M_Parametre()
         self.m_recherche = M_Recherche()
         self.m_header = M_Header()
+        self.m_result = M_Result()
         # Instanciate all view
         self.v_fenetre = V_Fenetre(root)
         self.v_menubar = V_Menubar(root)
@@ -59,3 +62,4 @@ class Principal:
             self.v_status
         )
         self.c_parametre = C_Header(self.v_header, self.m_header)
+        self.c_result = C_Result(self.v_onglet, self.m_result)

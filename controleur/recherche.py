@@ -9,7 +9,6 @@ Version 1.0
 CopyRight Hervé Beraud
 """
 from constante import GT_
-from constante import RESSOURCES_PATH
 from core.request import Action
 import threading
 try:
@@ -51,20 +50,26 @@ class Recherche:
         Launch url, and run request
         """
         from queue import Queue
+        # UI is busy
         self._busy()
+        self.vue.parent.update_idletasks()
         q = Queue()
         url = self.vue.txt_recherche.get()
+        # Check url validity
         if not self._is_valide(url):
             return False
         self.model.add_param(url)
         action = Action()
         request = threading.Thread(target=action.search, args=(q,))
         request.start()
-        request.join()
+        q.put(request)
+        q.join()
+        # Free UI
         self._free()
 
     def _is_valide(self, url):
         """
+        Check if the url as valide
         """
         if not url:
             self.message(GT_('Vous devez saisir obligatoirement une url'))
@@ -83,15 +88,21 @@ class Recherche:
 
     def _busy(self):
         """
+        Set the application busy
         """
         self.vue.txt_recherche.config(state="disabled")
+        self.vue.btn_go.config(state="disabled")
+        self.vue.btn_erase.config(state="disabled")
         self.vue.parent.config(cursor='watch')
-        print(1)
 
     def _free(self):
+        """
+        Set the application not busy
+        """
         self.vue.txt_recherche.config(state="normal")
+        self.vue.btn_go.config(state="normal")
+        self.vue.btn_erase.config(state="normal")
         self.vue.parent.config(cursor='arrow')
-        print(2)
 
     def effacerformulaireSaisie(self, event):
         """
