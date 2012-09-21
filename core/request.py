@@ -9,9 +9,8 @@ Version 1.0
 CopyRight Hervé Beraud
 """
 # Standard lib
+from datetime import datetime
 import urllib
-import threading
-import queue
 try:
     from urllib.parse import urlparse
     from urllib.parse import urlencode as urlencode
@@ -53,14 +52,28 @@ class Action:
         """
         self.param = urlencode(self.param.myParam.get())
         self.recherche = urlparse(self.recherche.my_recherche.get())
-        self.url = "%s%s%s" % (self.recherche[1], self.recherche[2], self.recherche[3])
-        response = self._requester()
-        if not response:
+        self.url = "%s%s%s" % (
+            self.recherche[1],
+            self.recherche[2],
+            self.recherche[3]
+        )
+        ok, response, timer = self._requester()
+        if not ok:
             self.error = Error()
-            self.error.add_param(GT_('Erreur'), GT_('Url injoignable : %s') % self.url)
+            self.error.add_param(
+                GT_('Erreur'),
+                GT_('Url injoignable : %s\n%s') % (self.url, response)
+            )
         else:
             self.result = Result()
-            self.result.add_param(GT_('OK'), GT_('OK'))
+            self.result.add_param(
+                GT_('http://%s en %d.%06d secondes') % (
+                    self.url,
+                    timer.seconds,
+                    timer.microseconds
+                ),
+                GT_('OK')
+            )
         q.task_done()
 
     def _requester(self):
@@ -71,18 +84,22 @@ class Action:
             methode = 'POST'
             if not self.param:
                 methode = 'GET'
-            print(self.url)
+            debut = datetime.now()
             connection = httplib.HTTPConnection(self.url)
-            connection.request(methode, "", self.param, self.header.my_header.get())
+            connection.request(
+                methode,
+                "",
+                self.param,
+                self.header.my_header.get()
+            )
             response = connection.getresponse()
             connection.close()
-            return response
+            timer = datetime.now() - debut
+            return True, response, timer
         except socket.gaierror:
-            print("Socket error")
-            return False
+            return False, GT_("Socket erreur"), None
         except http.client.InvalidURL:
-            print("Invalid url")
-            return False
+            return False, GT_("Url non valide"), None
 
 if __name__ == '__main__':
     test = Action()

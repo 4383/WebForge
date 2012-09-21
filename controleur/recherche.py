@@ -52,6 +52,7 @@ class Recherche:
         from queue import Queue
         # UI is busy
         self._busy()
+        self._loading_ok = False
         self.vue.parent.update_idletasks()
         q = Queue()
         url = self.vue.txt_recherche.get()
@@ -64,6 +65,8 @@ class Recherche:
         request.start()
         q.put(request)
         q.join()
+        self._loading_ok = True
+        self._loader(1.0)
         # Free UI
         self._free()
 
@@ -86,6 +89,16 @@ class Recherche:
             return False
         return True
 
+    def _loader(self, value):
+        """
+        """
+        self.vue_status.progressbar.set(value)
+        if value < 1.0 and not self._loading_ok:
+            value = value + 0.005
+            self.vue_status.progressbar.after(50, lambda: self._loader(value))
+        else:
+            self.vue_status.progressbar.set(1.0, GT_('Chargement terminé'))
+
     def _busy(self):
         """
         Set the application busy
@@ -94,6 +107,8 @@ class Recherche:
         self.vue.btn_go.config(state="disabled")
         self.vue.btn_erase.config(state="disabled")
         self.vue.parent.config(cursor='watch')
+        self.vue_status.progressbar.set(0.0, GT_('Connexion...'))
+        self.vue_status.progressbar.after(50, lambda: self._loader(0.0))
 
     def _free(self):
         """
@@ -103,6 +118,10 @@ class Recherche:
         self.vue.btn_go.config(state="normal")
         self.vue.btn_erase.config(state="normal")
         self.vue.parent.config(cursor='arrow')
+        self.vue_status.progressbar.after(
+            3000,
+            lambda: self.vue_status.progressbar.set(0.0, GT_(''))
+        )
 
     def effacerformulaireSaisie(self, event):
         """
