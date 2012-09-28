@@ -23,7 +23,7 @@ Development patterns
 UI is build on the MVC pattern and all models is observable, inspired from ToyMVC.
 All elements of the build is uncouple, the greater part of models that represents http particularity element
 is singleton.
-I integrate some tkinter add one from http://tkinter.unpythonic.net/wiki/ for extand fonctionality.
+I integrate some tkinter add on from http://tkinter.unpythonic.net/wiki/ for extand fonctionality.
 
 Particularity
 -------------
