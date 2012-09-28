@@ -10,6 +10,11 @@ The idea is to provide a tools for forgery our own http request manually, with p
 http method, headers, cookies, and all the element of http protocole for testing and analysing the return.
 He can help you in case of AJAX development.
 
+Usage
+-----
+
+    python main.py
+
 Development philosophy
 ----------------------
 
