@@ -1,7 +1,7 @@
 WEBFORGE
 ========
 
-Simple http request forgery for analysing server headers returning
+Simple HTTP protocole request forgery for analysing server headers returning
 
 The concept
 -----------
@@ -36,5 +36,5 @@ More bug can live in.
 
 Reference
 ---------
-http://tkinter.unpythonic.net/wiki/
-http://docs.python.org/library/
+*http://tkinter.unpythonic.net/wiki/
+*http://docs.python.org/library/
