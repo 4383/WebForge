@@ -4,7 +4,7 @@
 Système de bascule entre fichiers host
 """
 
-from controleur import principal
+from controleur.principal import Principal
 try:
     import Tkinter as tkinter
 except ImportError:
@@ -12,5 +12,5 @@ except ImportError:
 
 if __name__ == "__main__":
     fenetrePrincipal = tkinter.Tk()
-    page = principal.Principal(fenetrePrincipal)
+    page = Principal(fenetrePrincipal)
     fenetrePrincipal.mainloop()
