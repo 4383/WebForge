@@ -17,7 +17,7 @@ class Header:
     """
 
     _instance = None
-    myParam = None
+    my_header = None
     def __new__(cls):
         if not cls._instance:
             cls._instance = object.__new__(cls)
@@ -27,7 +27,7 @@ class Header:
         """
         Comments
         """
-        if not self.myParam:
+        if not self.my_header:
             self.my_header = O_Header(data)
 
     def add_param(self, name, value):
