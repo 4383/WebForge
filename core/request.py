@@ -66,13 +66,28 @@ class Action:
             )
         else:
             self.result = Result()
+            self.result.unset()
+            # Request information (url, execution time)
             self.result.add_param(
                 GT_('http://%s en %d.%06d secondes') % (
                     self.url,
                     timer.seconds,
                     timer.microseconds
                 ),
-                GT_('OK')
+                '%s : %s' % (response.status, response.reason)
+            )
+            # Request information (url, execution time)
+            self.result.add_param(
+                GT_('Entetes'),
+                response.getheaders()
+            )
+            version = 1.0
+            if response.version == 11:
+                version = 1.1
+
+            self.result.add_param(
+                GT_('Version du protocole'),
+                GT_('HTTP/%s' % version)
             )
         q.task_done()
 

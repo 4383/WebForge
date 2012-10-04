@@ -29,7 +29,7 @@ class Observateur:
         """
         self.callback[func] = 1
 
-    def del_callbacl(self, func):
+    def del_callback(self, func):
         """
         Delete callback function fr
         """
@@ -53,6 +53,14 @@ class Observateur:
         Delete all data
         """
         self.data.clear()
+
+    def is_empty(self):
+        """
+        Return True if not empty else return False
+        """
+        if not self.data:
+            return False
+        return True
 
 if __name__ == '__main__':
     test = Observateur()

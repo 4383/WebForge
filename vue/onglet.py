@@ -3,8 +3,6 @@
 file:vue/onglet.py
 """
 
-from constante import GT_
-from vue.vue import Vue
 try:
     from Tkinter import Frame
     from Tkinter import Label
@@ -15,6 +13,9 @@ except ImportError:
     from tkinter import Label
     from tkinter import Text
     from tkinter import Scrollbar
+from constante import GT_
+from vue.vue import Vue
+from core.utils import list_display_to_textarea
 
 class Onglet(Vue):
     """
@@ -52,7 +53,19 @@ class Onglet(Vue):
         """
         self.result.delete(0.0, 'end')
         for key, value in  liste.items():
-            self.result.insert('end', "%s\n\n" % key, ('result', ))
+            self.result.insert(
+                'end',
+                "%s\n\n" % key,
+                ('result', )
+            )
+            # Formate in list properly display all list
+            # don't display root python list format inline
+            if type(value) == type(list()):
+                tmp_value = None
+                for dictionnaire in value:
+                    tmp_value = '%s%s\n' % (tmp_value, list_display_to_textarea(dictionnaire))
+                value = tmp_value
+            value = "%s\n\n\n" % value
             self.result.insert('end', value)
 
     def set_error(self, liste):

@@ -42,6 +42,12 @@ class Result:
         """
         self.my_result.delete(index)
 
+    def unset(self):
+        self.my_result.unset()
+
+    def is_empty(self):
+        return self.my_result.is_empty()
+
 if __name__ == '__main__':
     TEST = Result()
 
