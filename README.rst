@@ -51,12 +51,13 @@ Guideline for future
 --------------------
 
 04 octobers 2012 :
-* Adding in main content tabs system to looking for http server logs files, and showing http request content download.
-* Adding unit test.
-* Handle view who representing table (http parameters, http headers) with the same controler.
-* Full english for all comments.
-* Complete lazy comments.
-* Adding system to initialize all components with ini files (example : starting from http trace to replay it)
+
++ Adding in main content tabs system to looking for http server logs files, and showing http request content download.
++ Adding unit test.
++ Handle view who representing table (http parameters, http headers) with the same controler.
++ Full english for all comments.
++ Complete lazy comments.
++ Adding system to initialize all components with ini files (example : starting from http trace to replay it)
 
 Reference
 ---------
