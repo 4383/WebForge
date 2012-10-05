@@ -52,7 +52,7 @@ class Action:
         """
         self.param = urlencode(self.param.myParam.get())
         self.recherche = urlparse(self.recherche.my_recherche.get())
-        self.url = "%s%s%s" % (
+        url = "%s%s%s" % (
             self.recherche[1],
             self.recherche[2],
             self.recherche[3]
@@ -62,7 +62,7 @@ class Action:
             self.error = Error()
             self.error.add_param(
                 GT_('Erreur'),
-                GT_('Url injoignable : %s\n%s') % (self.url, response)
+                GT_('Url injoignable : %s\n%s') % (url, response)
             )
         else:
             self.result = Result()
@@ -70,7 +70,7 @@ class Action:
             # Request information (url, execution time)
             self.result.add_param(
                 GT_('http://%s en %d.%06d secondes') % (
-                    self.url,
+                    url,
                     timer.seconds,
                     timer.microseconds
                 ),
@@ -100,10 +100,10 @@ class Action:
             if not self.param:
                 methode = 'GET'
             debut = datetime.now()
-            connection = httplib.HTTPConnection(self.url)
+            connection = httplib.HTTPConnection(self.recherche[1])
             connection.request(
                 methode,
-                "",
+                '%s/%s' % (self.recherche[2], self.recherche[3]),
                 self.param,
                 self.header.my_header.get()
             )
