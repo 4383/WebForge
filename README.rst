@@ -1,4 +1,4 @@
-/!\ This project is not done. Don't work perfectly for moment/!\
+/!\\ This project is not done. Don't work perfectly for moment /!\\
 =======================================================
 
 WEBFORGE
