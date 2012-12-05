@@ -1,3 +1,6 @@
+/!\ This project is not done. Don't work perfectly for moment/!\
+=======================================================
+
 WEBFORGE
 ========
 
@@ -38,6 +41,7 @@ Compatibility
 
 * Python2.7.2 (not functionnal) Somes errors occurs in import package version
 * Python3.2
+* /!\ Work on fedora but freeze on debian when we send HTTP request
 
 Possibly compliance with python3.3 but no test doing
 If you can, test it on other version and report to me.
